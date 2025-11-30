@@ -1,27 +1,26 @@
 const clearScreen = (screen, screen2, screen1) => {
-  for (const i in screen) {screen[i] = " ", screen2[i] = " ", screen1[i] = " "};
+  for (const i in screen) screen[i] = " ", screen2[i] = " ", screen1[i] = " ";
 };
 
-const displayOnScreen = (index, screen, screen1, screen2) => 
-  {
-    const screens = [screen, screen2];
-    const ind = index % 2;
-    const ind2 = 1 - ind;
+const displayOnScreen = (screen, screen1, screen2) => {
+  console.log(
+    screen.join("") + "\n" + screen1.join("") + "\n" +
+      screen2.join(""),
+  );
+};
 
-    console.log(screens[ind].join("") +"\n"+ screen1.join("") +"\n" + screens[ind2].join("")) 
-  };
 
-const drawScreen = (screen,screen1, screen2, name, currentOffset) => {
-  for (let i = name.length - 1 ; i >= 0; i -= 2) {
-    if(currentOffset % 2 === 0){
-      screen1[((currentOffset - name.length) + i) % screen.length] = name[i % name.length];
-      screen1[((currentOffset - name.length) + i + 1) % screen.length] = name[i + 1 % name.length];
-    }
-    else{
-
-      screen[((currentOffset - name.length) + i) % screen.length] = name[i % name.length];
-      screen2[((currentOffset - name.length) + i + 1) % screen2.length] = name[i + 1 % name.length];
-    }
+const drawScreen = (screen, screen1, screen2, name, currentOffset) => {
+  const screenIndex = (currentOffset - name.length) ;
+  const screens = [screen, screen2]
+  if(currentOffset % 2 === 0){
+    for (let i = name.length - 1; i >= 0; i -= 1)
+      screen1[screenIndex + i % screen.length] = name[i % name.length];
+  }
+  else {
+    for (let i = name.length - 1; i >= 0; i -= 1)
+      currentScreen = screens[i % screens.length];
+      screens[i % screens.length][screenIndex + i % screen.length] = name[i % name.length];
   }
 };
 
